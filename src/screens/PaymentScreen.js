@@ -51,9 +51,10 @@ export default function PaymentScreen() {
       } catch (error) {
         console.log(error)
       }
+    }else if(paymentOption === "card"){
+      navigate.navigate('card', { amount: amount });
     }
   };
-
   return (
     <View>
       <HeaderComponent />
@@ -85,7 +86,7 @@ export default function PaymentScreen() {
                 />
               </View>
               <View style={styles.radioText}>
-                <RadioButton value="tarjeta" />
+                <RadioButton value="card" />
                 <Text style={styles.text}>
                   Tarjeta débito/crédito
                   <Icon
