@@ -1,12 +1,17 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Icon } from "react-native-elements";
+import { Button, Icon } from "react-native-elements";
 import HeaderComponent from "../components/common/HeaderComponent";
 import ButtonHomeComponent from "../components/ButtonHomeComponent";
 import CreditComponenent from "../components/CreditComponenent";
 
 export default function HomeScreen() {
+  const navigate = useNavigation();
+
+  const onNavigate = () => {
+    navigate.navigate('ticket');
+  };
   return (
     <View style={styles.iphone}>
       <View style={styles.div}>
@@ -14,6 +19,9 @@ export default function HomeScreen() {
           <HeaderComponent />
           <CreditComponenent />
           <ButtonHomeComponent />
+          <Button onPress={onNavigate}>
+            hola
+          </Button>
         </View>
       </View>
     </View>

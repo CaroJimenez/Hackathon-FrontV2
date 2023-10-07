@@ -11,16 +11,18 @@ export default function HeaderComponent() {
         type="material-community"
         size={30}
         style={styles.icon}
+        color={"white"}
       />
       <View style={styles.textContainer}>
         <Text style={styles.textWrapper}>Bonanza</Text>
-        <Text style={styles.textWrapper2}>Pagos</Text>
+        <Text style={styles.textWrapper2}><Icon name='credit-card-outline' color={"white"} type='material-community' size={15}/> Pagos</Text>
       </View>
       <Icon
         name="bell-outline"
         type="material-community"
         size={30}
         style={styles.icon}
+        color={"white"}
       />
     </SafeAreaView>
   );
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    height: 100,
+    height: 180,
     width: '100%',
     backgroundColor: '#41A98f',
     paddingHorizontal: 16,
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textWrapper: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
@@ -60,7 +62,5 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
   },
-  icon: {
-    color: 'white',
-  },
+  
 });

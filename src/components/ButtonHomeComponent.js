@@ -27,6 +27,7 @@ export default function ButtonHomeComponent() {
             type="material-community"
             size={30}
             style={styles.chevronIcon}
+            color={"white"}
           />
         </TouchableOpacity>
       </TouchableOpacity>
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   deudaButton: {
     height: 54,
     position: 'absolute',
-    top: 221,
+    top: 280,
     width: 259,
   },
   overlap3: {
@@ -47,8 +48,10 @@ const styles = StyleSheet.create({
     width: 257,
   },
   rectangle: {
-    backgroundColor: '#d9d9d9',
-    borderRadius: 6,
+    backgroundColor: 'white',
+    borderColor: '#41a98f',
+    borderRadius:6,
+    borderWidth: 1,
     height: 48,
     left: 0,
     position: 'absolute',
@@ -65,6 +68,8 @@ const styles = StyleSheet.create({
     flex: 1, 
   },
   rectangle2: {
+    borderEndEndRadius:6,
+    borderTopEndRadius:6,
     backgroundColor: '#41a98f',
     height: 48,
     left: 146,

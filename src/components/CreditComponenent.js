@@ -15,14 +15,25 @@ export default function CreditComponenent() {
 const styles = StyleSheet.create({
   credito: {
     height: 96,
-    
     position: 'absolute',
-    top: 97,
+    top: 130,
     width: 271,
     alignItems: 'center', 
   },
   overlap2: {
-    backgroundColor: '#e2e2e2',
+    backgroundColor: 'white',
+    // Sombras específicas de la plataforma
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 4, // Elevación para sombra en dispositivos Android
+      },
+    }),
     borderRadius: 7,
     height: 96,
     position: 'relative',
