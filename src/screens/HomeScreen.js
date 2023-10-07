@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
     // lineHeight: 'normal',
     position: 'absolute',
-    textShadow: '0px 4px 4px #00000040',
+    // textShadow: '0px 4px 4px #00000040',
     top: 35,
     width: 181,
   },
