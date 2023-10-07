@@ -35,6 +35,12 @@ cd [ your selected folder ]
 ```sh
 git clone https://github.com/CaroJimenez/Hackathon-FrontV2.git
 ```
+```sh
+npm i
+```
+```sh
+npx expo start
+```
 (Visual Studio Code)
 ```sh
 code .
@@ -43,12 +49,6 @@ code .
 ```sh
 
 ./ideash
-```
-```sh
-npm i
-```
-```sh
-npx expo start
 ```
 
 Don't forget to give us a star;)
