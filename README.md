@@ -51,7 +51,7 @@ code .
 ./ideash
 ```
 
-Don't forget to give us a star;)
+Don't forget to install Expo go on your app store and give us a star;)
 
 
 
