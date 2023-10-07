@@ -71,7 +71,6 @@ const Styles = StyleSheet.create({
     height: 24,
     width: 24,
     marginBottom: 0,
-		color: "#888888",
 
   }
 });
