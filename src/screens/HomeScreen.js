@@ -5,6 +5,7 @@ import { Button, Icon } from "react-native-elements";
 import HeaderComponent from "../components/common/HeaderComponent";
 import ButtonHomeComponent from "../components/ButtonHomeComponent";
 import CreditComponenent from "../components/CreditComponenent";
+import Navbar from "../components/common/Navbar";
 
 export default function HomeScreen() {
   const navigate = useNavigation();
@@ -24,6 +25,7 @@ export default function HomeScreen() {
           </Button>
         </View>
       </View>
+          <Navbar />
     </View>
   );
 }
