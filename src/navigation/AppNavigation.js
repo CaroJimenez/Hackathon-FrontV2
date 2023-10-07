@@ -13,14 +13,14 @@ export default function AppNavigation() {
   return (
     
     <Stack.Navigator
-    screenOptions={{
-      header: (props) => <HeaderComponent {...props}/>
-    }}
+    // screenOptions={{
+    //   header: (props) => <HeaderComponent {...props}/>
+    // }}
     >
       <Stack.Screen name ='Home' component={HomeScreen}
       options={{
 
-        headerShown: true,
+        headerShown: false,
       }
       }
       />
