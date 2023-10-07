@@ -19,7 +19,7 @@
 [- Bedja](https://github.com/BetjaderOD)
 [- Carol](https://github.com/CaroJimenez)
 [- Ivan](https://github.com/IvanMataHalcon)
-[- Emmanuel]
+-Emmanuel
 [- Kevin](https://github.com/kevdev04)
 
 
@@ -35,8 +35,14 @@ cd [ your selected folder ]
 ```sh
 git clone https://github.com/CaroJimenez/Hackathon-FrontV2.git
 ```
+(Visual Studio Code)
 ```sh
-code .   (Visual Studio Code),  ./ideash (IntelliJ Idea)
+code .
+```
+(IntelliJ Idea)
+```sh
+
+./ideash
 ```
 ```sh
 npm i
