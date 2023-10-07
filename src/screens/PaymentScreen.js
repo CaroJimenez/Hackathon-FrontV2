@@ -6,20 +6,23 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  Alert,
+  Keyboard,
 } from "react-native";
 import { RadioButton } from "react-native-paper";
-import GoBack from "../components/goBack";
 import HeaderComponent from "../components/common/HeaderComponent";
 import { Icon } from "react-native-elements";
 import AxiosClient, { generateTicketOxxoPay } from "../utils/axios";
 import { useNavigation } from "@react-navigation/native";
+import LoaderButton from "../components/LoaderButton";
 
-export default function PaymentScreen() {
+export default function PaymentScreen({ route }) {
+  const { credit } = route.params;
   const [amount, setAmount] = useState("");
   const [paymentOption, setPaymentOption] = useState("");
-  const [dataTicket,setDataTicket] = useState()
+  const [dataTicket, setDataTicket] = useState();
   const navigate = useNavigation();
-
+  const [loading, setLoading] = useState(false);
 
   const customer_info = {
     customer_email: "20213tn032@utez.edu.mx",
@@ -32,95 +35,126 @@ export default function PaymentScreen() {
   };
 
   const handlePayment = async () => {
-    if (paymentOption === "oxxo") {
-      try {
-        const response = await AxiosClient({
-          url: "/conekta/",
-          method: "POST",
-          data: {
-            amount: amount*100,
-            customer_name: "Betja",
-            customer_email: "20213tn032@utez.edu.mx",
-            customer_phone: "7771234560",
-          },
-        });
-        setDataTicket(response.data)
-        if(response.status == 200){
-          navigate.navigate('ticket', { dataTicket: response.data, amount: amount });
+    if (amount !== "" && paymentOption !== "") {
+      if (amount <= credit) {
+        if(amount > 10){
+          if (paymentOption === "oxxo") {
+            try {
+              setLoading(true);
+              const response = await AxiosClient({
+                url: "/conekta/",
+                method: "POST",
+                data: {
+                  amount: amount * 100,
+                  customer_name: "Betja",
+                  customer_email: "20213tn032@utez.edu.mx",
+                  customer_phone: "7771234560",
+                },
+              });
+              setDataTicket(response.data);
+              if (response.status == 200) {
+                navigate.navigate("ticket", {
+                  dataTicket: response.data,
+                  amount: amount,
+                });
+              }
+            } catch (error) {
+              console.log(error);
+            }finally{
+              setLoading(false);
+            }
+          } else if (paymentOption === "card") {
+            navigate.navigate("card", { amount: amount });
+          }
+        }else{
+          Alert.alert("Error", "Debe de ser mayor de 10 pesos")
         }
-      } catch (error) {
-        console.log(error)
+      } else {
+        Alert.alert(
+          "Error",
+          "El monto ingresado supera la cantidad a pagar de tu credito"
+        );
       }
-    }else if(paymentOption === "card"){
-      navigate.navigate('card', { amount: amount });
+    } else {
+      Alert.alert(
+        "Error",
+        "No puede ir vacio, debes de ingresar cantidad y seleccionar un metodo de pago"
+      );
     }
   };
   return (
-    <View>
-      <HeaderComponent />
-      <View style={styles.mainContainer}>
-        <Text style={styles.title}>Ingresa el monto a pagar</Text>
-        <View style={styles.money}>
-          <Text style={styles.input}>$</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="0.00"
-            keyboardType="numeric"
-            value={amount}
-            onChangeText={(text) => setAmount(text)}
+    <TouchableOpacity onPress={() => Keyboard.dismiss()}>
+      <View>
+        <HeaderComponent />
+        <View style={styles.mainContainer}>
+          <Text style={styles.title}>Ingresa el monto a pagar</Text>
+          <View style={styles.money}>
+            <Text style={styles.input}>$</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="0.00"
+              keyboardType="numeric"
+              value={amount}
+              onChangeText={(text) => setAmount(text)}
+            />
+          </View>
+
+          <View style={styles.paymentContainer}>
+            <View style={styles.radioContainer}>
+              <Text >Selecciona una opcion</Text>
+              <RadioButton.Group
+                onValueChange={(value) => handlePaymentOptionChange(value)}
+                value={paymentOption}
+              >
+                <View style={styles.radioText}>
+                  <RadioButton value="oxxo" />
+                  <Text style={styles.text}>Pago con</Text>
+                  <Image
+                    source={require("../../assets/OxxoPay.png")}
+                    style={styles.image}
+                  />
+                </View>
+                <View style={styles.radioText}>
+                  <RadioButton value="card" status="checked"></RadioButton>
+                  <Text style={styles.text}>
+                    Tarjeta débito/crédito
+                    <Icon
+                      name="credit-card-multiple-outline"
+                      type="material-community"
+                      size={20}
+                      style={styles.icon}
+                      color={"black"}
+                    />
+                  </Text>
+                </View>
+              </RadioButton.Group>
+            </View>
+          </View>
+
+          <TouchableOpacity style={styles.button} onPress={handlePayment}>
+            {loading ? (
+              <LoaderButton loadingButton={loading} />
+            ) : (
+              <Text style={styles.textButton}>
+                Pagar &nbsp;
+                <Icon
+                  name="lock-outline"
+                  type="material-community"
+                  size={20}
+                  color={"white"}
+                />
+              </Text>
+            )}
+          </TouchableOpacity>
+        </View>
+        <View style={styles.viewLogo}>
+          <Image
+            source={require("../../assets/conekta.png")}
+            style={styles.logoConekta}
           />
         </View>
-
-        <View style={styles.paymentContainer}>
-          <View style={styles.radioContainer}>
-            <RadioButton.Group
-              onValueChange={(value) => handlePaymentOptionChange(value)}
-              value={paymentOption}
-            >
-              <View style={styles.radioText}>
-                <RadioButton value="oxxo" />
-                <Text style={styles.text}>Pago con</Text>
-                <Image
-                  source={require("../../assets/OxxoPay.png")}
-                  style={styles.image}
-                />
-              </View>
-              <View style={styles.radioText}>
-                <RadioButton value="card" />
-                <Text style={styles.text}>
-                  Tarjeta débito/crédito
-                  <Icon
-                    name="credit-card-multiple-outline"
-                    type="material-community"
-                    size={20}
-                    style={styles.icon}
-                    color={"black"}
-                  />
-                </Text>
-              </View>
-            </RadioButton.Group>
-          </View>
-        </View>
-
-        <TouchableOpacity style={styles.button} onPress={handlePayment}>
-          <Text style={styles.textButton}>
-            Pagar &nbsp;
-            <Icon
-              name="lock-outline"
-              type="material-community"
-              size={20}
-              color={"white"}
-            />
-          </Text>
-        </TouchableOpacity>
       </View>
-      <View style={styles.viewLogo}>
-        <Image
-          source={require("../../assets/conekta.png")}
-          style={styles.logoConekta}
-        />
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -135,6 +169,17 @@ const styles = StyleSheet.create({
   mainContainer: {
     marginTop: 20,
     marginHorizontal: 20,
+    ...Platform.select({
+      ios: {
+        shadowColor: "black",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 4, // Elevación para sombra en dispositivos Android
+      },
+    }),
   },
   input: {
     fontSize: 40,

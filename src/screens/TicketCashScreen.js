@@ -8,11 +8,16 @@ import { useNavigation } from "@react-navigation/native";
 const TicketCashScreen = ({ route }) => {
   const { dataTicket, amount } = route.params;
   const navigate = useNavigation();
-  const reference = 4370847530745;
-  const day = "6";
-  const month = "octubre";
-  const year = "2023";
-  const time = "9:33pm";
+
+  const timestamp = dataTicket?.created_at;
+  const date = new Date(timestamp * 1000);
+
+  const day = date.getDate();
+  const month = date.toLocaleString("default", { month: "long" });
+  const year = date.getFullYear();
+  const time = date.toLocaleTimeString();
+
+  const formattedDate = `Creado el ${day} de ${month} de ${year} a las ${time}`;
 
   const handleClose = () => {
     navigate.navigate("Home");
@@ -31,9 +36,7 @@ const TicketCashScreen = ({ route }) => {
         <Text>{dataTicket.reference}</Text>
         <Text style={styles.textPagar}>Debes de pagar</Text>
         <Text style={styles.textAmount}>${amount}</Text>
-        <Text style={styles.textExpire}>
-          Expira {day} de {month} de {year} a las {time}
-        </Text>
+        <Text style={styles.textExpire}>{formattedDate}</Text>
         <Text style={styles.textInstruction}>
           Muestra este código de barras al cajero y completa el pago
         </Text>
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
     color: "#155e8f",
   },
   buttonContainer: {
-    marginTop: 200,
+    marginTop: 130,
   },
   buttonClose: {
     width: 150,

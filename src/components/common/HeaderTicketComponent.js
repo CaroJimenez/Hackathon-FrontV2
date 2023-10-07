@@ -2,18 +2,19 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Icon, Image } from "react-native-elements";
+import { RFValue } from "react-native-responsive-fontsize"; // Importa react-native-responsive-fontsize
 
 export default function HeaderTicketComponent() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.textContainer}>
-      <Icon
-        name="check-circle"
-        type="material-community"
-        size={40}
-        style={styles.icon}
-        color={"white"}
-      />
+        <Icon
+          name="check-circle"
+          type="material-community"
+          size={RFValue(40)} // Usa RFValue para hacer que el tamaño sea receptivo
+          style={styles.icon}
+          color={"white"}
+        />
         <Text style={styles.textWrapper}>Todo esta listo</Text>
         <Text style={styles.textWrapper2}>
           ¡Con esta referencia puedes pagar en cualquier Oxxo!
@@ -27,10 +28,10 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    height: 225,
+    height: RFValue(225), // Usa RFValue para hacer que la altura sea receptiva
     width: "100%",
     backgroundColor: "#41A98f",
-    paddingHorizontal: 16,
+    paddingHorizontal: RFValue(16), // Usa RFValue para hacer que el relleno sea receptivo
     alignItems: "center",
     justifyContent: "center",
     shadowColor: "black",
@@ -39,27 +40,26 @@ const styles = StyleSheet.create({
       height: 0,
     },
     shadowOpacity: 0.25,
-    shadowRadius: 10,
+    shadowRadius: RFValue(10), // Usa RFValue para hacer que el radio de sombra sea receptivo
     elevation: 5,
   },
   textContainer: {
     alignItems: "center",
   },
   textWrapper: {
-    top:10,
-    fontSize: 35,
+    top: RFValue(10), // Usa RFValue para hacer que la posición sea receptiva
+    fontSize: RFValue(35), // Usa RFValue para hacer que el tamaño de fuente sea receptivo
     fontWeight: "bold",
     color: "white",
     textAlign: "center",
   },
   textWrapper2: {
-    top:15,
-    fontSize: 20,
+    top: RFValue(10), // Usa RFValue para hacer que la posición sea receptiva
+    fontSize: RFValue(20), // Usa RFValue para hacer que el tamaño de fuente sea receptivo
     color: "white",
     textAlign: "center",
   },
-  icon:{
-    marginTop:30
-  }
-  
+  icon: {
+    marginTop: RFValue(30), // Usa RFValue para hacer que el margen superior sea receptivo
+  },
 });

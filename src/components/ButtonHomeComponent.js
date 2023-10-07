@@ -3,11 +3,12 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from 'react-native-elements';
 
-export default function ButtonHomeComponent() {
+export default function ButtonHomeComponent({user}) {
   const navigate = useNavigation();
 
   const onNavigate = () => {
-    navigate.navigate('Payment');
+    navigate.navigate('Payment', { credit: user?.credit });
+
   };
 
   return (

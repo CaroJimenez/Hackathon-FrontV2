@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-export default function CreditComponenent() {
+export default function CreditComponenent({user}) {
+  console.log(user + "creditComponentr")
   return (
     <View style={styles.credito}>
       <View style={styles.overlap2}>
         <Text style={styles.textWrapper4}>Credito</Text>
-        <Text style={styles.textWrapper3}>$2,548.00</Text>
+        <Text style={styles.textWrapper3}>${user?.credit}</Text>
       </View>
     </View>
   );

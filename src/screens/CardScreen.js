@@ -9,18 +9,19 @@ import {
 import React, { useState } from "react";
 import HeaderComponent from "../components/common/HeaderComponent";
 import { Icon } from "react-native-elements";
+import { useNavigation } from "@react-navigation/core";
 
 export default function CardScreen({ route }) {
+  const navigate = useNavigation();
   const { amount } = route.params;
-  const [expiryInput, setExpiryInput] = useState(""); // Estado local para el campo de entrada de MM/YY
-  
-  const [expiry, setExpiry] = useState(""); // Estado para el valor formateado de MM/YY
+  const [expiryInput, setExpiryInput] = useState("");
+  const handleClose = () => {
+    navigate.navigate("Home");
+  };
+  const [expiry, setExpiry] = useState(""); 
 
   const handleExpiryChange = (text) => {
-    // Asegurarse de que el valor solo contenga números y tenga una longitud máxima de 5 caracteres (MM/YY)
     const cleanedText = text.replace(/[^0-9]/g, "").slice(0, 4);
-  
-    // Formatear el valor como MM/YY (dos dígitos para mes y año) con "/" en el medio
     let formattedExpiry = "";
     if (cleanedText.length >= 2) {
       formattedExpiry += cleanedText.slice(0, 2);
@@ -28,11 +29,8 @@ export default function CardScreen({ route }) {
     if (cleanedText.length >= 4) {
       formattedExpiry += "/" + cleanedText.slice(2, 4);
     }
-  
-    // Actualizar el estado expiry con el valor formateado
     setExpiry(text);
   };
-  
 
   return (
     <View>
@@ -68,24 +66,28 @@ export default function CardScreen({ route }) {
           <Text style={styles.text}>CVV</Text>
         </View>
         <View style={styles.section2}>
-        <TextInput
-  style={styles.input2}
-  placeholder="MM/YY"
-  value={expiry} // Asignar el valor del estado al input
-  onChangeText={handleExpiryChange} // Manejar cambios en el input
-  keyboardType="numeric"
-  maxLength={5}
-/>
+          <TextInput
+            style={styles.input2}
+            placeholder="MM/YY"
+            value={expiry} // Asignar el valor del estado al input
+            onChangeText={handleExpiryChange} // Manejar cambios en el input
+            keyboardType="numeric"
+            maxLength={5}
+          />
           <TextInput
             style={styles.input2}
             keyboardType="pass"
             placeholder="****"
           ></TextInput>
         </View>
-
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.textButton}>Pagar</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.buttonCancelled} onPress={handleClose}>
+            <Text style={styles.textButton2}>Cancelar</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.textButton}>Pagar</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -133,18 +135,31 @@ const styles = StyleSheet.create({
     width: "45%",
     marginRight: 10,
   },
-  button: {
-    borderRadius: 3,
+  buttonContainer: {
+    flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
-    width: 175,
-    height: 50,
-    backgroundColor: "rgba(65, 169, 143, 1)",
-    alignSelf: "center",
-    marginTop: 50,
+    marginTop: 20, 
+  },
+  buttonCancelled: {
+    backgroundColor: "red", // Color de fondo del botón Cancelar
+    borderRadius: 8, // Ajusta según tus preferencias
+    padding: 10, // Ajusta según tus preferencias
+    flex: 1, // Esto permite que el botón Cancelar ocupe el espacio disponible
+    marginRight: 5,
+  },
+  button: {
+    backgroundColor: "green", // Color de fondo del botón Pagar
+    borderRadius: 8,
+    padding: 10, 
+    flex: 1, 
+    marginRight:15,
   },
   textButton: {
-    fontSize: 21,
-    color: "#fff",
+    textAlign: "center",
+    color: "white", 
+  },
+  textButton2: {
+    textAlign: "center",
+    color: "white",
   },
 });
