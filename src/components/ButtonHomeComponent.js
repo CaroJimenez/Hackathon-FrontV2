@@ -37,7 +37,6 @@ export default function ButtonHomeComponent() {
 const styles = StyleSheet.create({
   deudaButton: {
     height: 54,
-    left: 66,
     position: 'absolute',
     top: 221,
     width: 259,

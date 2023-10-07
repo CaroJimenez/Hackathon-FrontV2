@@ -15,7 +15,7 @@ export default function CreditComponenent() {
 const styles = StyleSheet.create({
   credito: {
     height: 96,
-    left: 59,
+    
     position: 'absolute',
     top: 97,
     width: 271,
