@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import HeaderComponent from '../components/common/HeaderComponent';
+import PaymentScreen from '../screens/PaymentScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -18,6 +19,13 @@ export default function AppNavigation() {
     // }}
     >
       <Stack.Screen name ='Home' component={HomeScreen}
+      options={{
+
+        headerShown: false,
+      }
+      }
+      />
+      <Stack.Screen name ='Payment' component={PaymentScreen}
       options={{
 
         headerShown: false,
