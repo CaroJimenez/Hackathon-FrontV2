@@ -5,17 +5,17 @@ import HeaderTicketComponent from "../components/common/HeaderTicketComponent";
 import { Button, Image } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
-const TicketCashScreen = () => {
+const TicketCashScreen = ({ route }) => {
+  const { dataTicket, amount } = route.params;
   const navigate = useNavigation();
   const reference = 4370847530745;
-  const amount = "2,000.00";
   const day = "6";
   const month = "octubre";
   const year = "2023";
   const time = "9:33pm";
 
   const handleClose = () => {
-    navigate.navigate('Home');
+    navigate.navigate("Home");
   };
 
   return (
@@ -24,11 +24,11 @@ const TicketCashScreen = () => {
       <View style={styles.contentContainer}>
         <Image
           source={{
-            uri: "https://barcodes.conekta.com/sandbox_reference.png",
+            uri: dataTicket.barcode_url,
           }}
           style={styles.imageStyle}
         />
-        <Text>{reference}</Text>
+        <Text>{dataTicket.reference}</Text>
         <Text style={styles.textPagar}>Debes de pagar</Text>
         <Text style={styles.textAmount}>${amount}</Text>
         <Text style={styles.textExpire}>
