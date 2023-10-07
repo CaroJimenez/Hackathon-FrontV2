@@ -20,16 +20,12 @@ export default function HomeScreen() {
           <HeaderComponent />
           <CreditComponenent />
           <ButtonHomeComponent />
-          <Button onPress={onNavigate}>
-            hola
-          </Button>
         </View>
       </View>
           <Navbar />
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   iphone: {
     backgroundColor: "#ffffff",
