@@ -1,4 +1,4 @@
-# Hey Everyone, Welcome to the front-end side of this awesome Project we hope it can result helpful for you
+# Bonanza's Payment Module #HackMorelos12
 
 ## Features
 
